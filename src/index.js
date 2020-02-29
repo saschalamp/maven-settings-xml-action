@@ -1,7 +1,5 @@
 var core = require('@actions/core');
 var settings = require('./settings');
-var os = require('os');
-var path = require('path');
 
 function run() {
   try {
@@ -14,8 +12,7 @@ function run() {
     settings.updatePluginRepositories(templateXml);
 
     // write template to filepath
-    var settingsPath = path.join(os.homedir(), '.m2', 'settings.xml');
-    settings.writeSettings(settingsPath, templateXml);
+    settings.writeSettings( templateXml);
 
   } catch (error) {
     core.setFailed(error.message);

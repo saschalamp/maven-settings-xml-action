@@ -4,6 +4,8 @@ var fs = require('fs');
 var DOMParser = require('xmldom').DOMParser;
 var XMLSerializer = require('xmldom').XMLSerializer;
 
+var paths = require('./paths');
+
 function getSettingsTemplate() {
     core.info("opening settings template");
     var templatePath = path.join(__dirname, '../template', 'settings.xml');
@@ -11,7 +13,8 @@ function getSettingsTemplate() {
     return new DOMParser().parseFromString(template, 'text/xml');
 }
 
-function writeSettings(settingsPath, templateXml) {
+function writeSettings(templateXml) {
+    var settingsPath = paths.getSettingsPath();
     if (!fs.existsSync(path.dirname(settingsPath))) {
         core.info("creating ~/.m2 directory");
         fs.mkdirSync(path.dirname(settingsPath));
